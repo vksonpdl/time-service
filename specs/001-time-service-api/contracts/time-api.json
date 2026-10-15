@@ -1,0 +1,75 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Time Service REST API",
+    "version": "1.0.0",
+    "description": "API for retrieving current server time and timezone."
+  },
+  "paths": {
+    "/api/v1/time": {
+      "get": {
+        "summary": "Get current server time",
+        "description": "Returns the current server time, timezone, and status in ISO-8601 JSON format.",
+        "responses": {
+          "200": {
+            "description": "Successful time response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TimeResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "TimeResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "SUCCESS"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2026-10-15T14:30:00Z"
+          },
+          "timezone": {
+            "type": "string",
+            "example": "UTC"
+          }
+        },
+        "required": ["status", "timestamp", "timezone"]
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "errorCode": {
+            "type": "string",
+            "example": "INTERNAL_SERVER_ERROR"
+          },
+          "errorMessage": {
+            "type": "string",
+            "example": "An unexpected error occurred while fetching server time."
+          }
+        },
+        "required": ["errorCode", "errorMessage"]
+      }
+    }
+  }
+}
