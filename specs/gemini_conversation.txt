@@ -1,0 +1,30 @@
+Open AI Context (gemini)
+
+	#1) /speckit.specify
+	    Create a new REST endpoint for the time-conversion-api that converts UTC to IST.
+		The AI will read your context, negotiate the requirements if needed, and generate a spec.md file inside your new .specify/features/time-conversion-api/ folder.
+
+	#2) /speckit.clarify
+	    what is the request structure for this new API ?
+		Updates spec.md
+
+	#3) /speckit.plan
+		AI will automatically read the spec.md file you just finalized.
+		What happens next:
+			The AI will analyze your specifications and generate a plan.md file. This file will outline the exact architectural steps required, such as
+                Which existing files need to be modified (e.g., adding the route to TimeConversionController.java).
+                Which new files need to be created (e.g., a new DTO for the request/response)?
+                Any dependencies or utility classes required for the UTC to IST conversion.
+		Based on the Impl Plan Path: specs/002-utc-ist-conversion/plan.md
+		Generated Artifacts:
+			specs/002-utc-ist-conversion/plan.md
+			specs/002-utc-ist-conversion/research.md
+			specs/002-utc-ist-conversion/data-model.md
+			specs/002-utc-ist-conversion/contracts/time-conversion-api.json
+			specs/002-utc-ist-conversion/quickstart.md
+
+	#4) /speckit.tasks
+	    Created /tasks.md
+
+	#5) /speckit.implement
+	    Created source code and Junit
