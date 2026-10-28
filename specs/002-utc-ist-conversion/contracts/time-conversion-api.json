@@ -1,0 +1,100 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "UTC to IST Time Conversion API",
+    "version": "1.0.0",
+    "description": "API for converting UTC timestamps to Indian Standard Time (IST)."
+  },
+  "paths": {
+    "/api/v1/convert/utc-to-ist": {
+      "post": {
+        "summary": "Convert UTC time to IST",
+        "description": "Converts a provided UTC timestamp (or current UTC time if omitted) to IST (Asia/Kolkata).",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TimeConversionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful conversion response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TimeConversionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid timestamp format",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "TimeConversionRequest": {
+        "type": "object",
+        "properties": {
+          "utcTimestamp": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2026-10-28T12:00:00Z"
+          }
+        }
+      },
+      "TimeConversionResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "SUCCESS"
+          },
+          "sourceTime": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2026-10-28T12:00:00Z"
+          },
+          "convertedTime": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2026-10-28T17:30:00+05:30"
+          },
+          "targetTimezone": {
+            "type": "string",
+            "example": "Asia/Kolkata"
+          }
+        },
+        "required": ["status", "sourceTime", "convertedTime", "targetTimezone"]
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "errorCode": {
+            "type": "string",
+            "example": "INVALID_TIMESTAMP"
+          },
+          "errorMessage": {
+            "type": "string",
+            "example": "Invalid ISO-8601 timestamp format provided."
+          }
+        },
+        "required": ["errorCode", "errorMessage"]
+      }
+    }
+  }
+}
