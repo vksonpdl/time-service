@@ -24,3 +24,6 @@ Thumbs.db
 *.tmp
 *.swp
 .env*
+
+# Spec Kit Local State
+.specify/feature.json
